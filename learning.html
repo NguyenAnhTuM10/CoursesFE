@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>F8 - Học Lập Trình Để Đi Làm</title>
+    <link rel="stylesheet" href="./assets/css/learning.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header-container">
+        <div class="logo">
+          <a href="#">
+            <div class="logo-box">F8</div>
+            <span class="logo-text">Học Lập Trình Để Đi Làm</span>
+          </a>
+        </div>
+
+        <div class="search-bar">
+          <i class="fas fa-search search-icon"></i>
+          <input
+            type="text"
+            placeholder="Tìm kiếm khóa học, bài viết, video, ..." />
+        </div>
+
+        <div class="auth-buttons">
+          <a href="#" class="btn btn-outline">Đăng ký</a>
+          <a href="#" class="btn btn-primary">Đăng nhập</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <aside class="sidebar">
+        <nav>
+          <ul>
+            <li class="sidebar-item active">
+              <a href="#">
+                <i class="fas fa-home"></i>
+                <span>Trang chủ</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="#">
+                <i class="fas fa-road"></i>
+                <span>Lộ trình</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="#">
+                <i class="fas fa-newspaper"></i>
+                <span>Bài viết</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section class="learning-path-header">
+          <h1>Lộ trình học</h1>
+          <p>
+            Để bắt đầu một cách thuận lợi, bạn nên tập trung vào một lộ trình
+            học. Ví dụ: Để đi làm với vị trí "Lập trình viên Front-end" bạn nên
+            tập trung vào lộ trình "Front-end".
+          </p>
+        </section>
+
+        <section class="learning-paths" id="learning-paths">
+          <!-- Learning paths will be loaded here via JavaScript -->
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Đang tải lộ trình học...</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <div class="container footer-container">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <div class="logo-box">F8</div>
+            <span class="logo-text">Học Lập Trình Để Đi Làm</span>
+          </div>
+          <div class="footer-contact">
+            <p><strong>Điện thoại:</strong> 08 1919 8989</p>
+            <p><strong>Email:</strong> contact@fullstack.edu.vn</p>
+            <p>
+              <strong>Địa chỉ:</strong> Số 1, ngõ 41, Trần Duy Hưng, Cầu Giấy,
+              Hà Nội
+            </p>
+          </div>
+          <div class="dmca-badge">
+            <img
+              src="https://images.dmca.com/Badges/dmca-badge-w100-5x1-06.png"
+              alt="DMCA Protected" />
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3>VỀ F8</h3>
+          <ul class="footer-links">
+            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="#">Liên hệ</a></li>
+            <li><a href="#">Điều khoản</a></li>
+            <li><a href="#">Bảo mật</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>SẢN PHẨM</h3>
+          <ul class="footer-links">
+            <li><a href="#">Game Nester</a></li>
+            <li><a href="#">Game CSS Diner</a></li>
+            <li><a href="#">Game CSS Selectors</a></li>
+            <li><a href="#">Game Froggy</a></li>
+            <li><a href="#">Game Froggy Pro</a></li>
+            <li><a href="#">Game Scoops</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>CÔNG CỤ</h3>
+          <ul class="footer-links">
+            <li><a href="#">Tạo CV xin việc</a></li>
+            <li><a href="#">Rút gọn liên kết</a></li>
+            <li><a href="#">Clip-path maker</a></li>
+            <li><a href="#">Snippet generator</a></li>
+            <li><a href="#">CSS Grid generator</a></li>
+            <li><a href="#">Cảnh báo sờ tay lên mặt</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column wide-column">
+          <h3>CÔNG TY CỔ PHẦN CÔNG NGHỆ GIÁO DỤC F8</h3>
+          <ul class="company-info">
+            <li><strong>Mã số thuế:</strong> 0109922901</li>
+            <li><strong>Ngày thành lập:</strong> 04/03/2022</li>
+            <li>
+              <strong>Lĩnh vực hoạt động:</strong> Giáo dục, công nghệ - lập
+              trình. Chúng tôi tập trung xây dựng và phát triển các sản phẩm
+              mang lại giá trị cho cộng đồng lập trình viên Việt Nam.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="copyright">
+            © 2018 - 2025 F8. Nền tảng học lập trình hàng đầu Việt Nam
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-icon youtube"
+              ><i class="fab fa-youtube"></i
+            ></a>
+            <a href="#" class="social-icon facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="social-icon tiktok"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./js/learning.js"></script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 // Configuration
 const config = {
     // Site settings
-    siteName: 'Fullstack.edu.vn Clone',
+    siteName: 'Fullstack.edu.vn',
     siteDescription: 'Học Lập Trình Để Đi Làm',
     
     // API endpoints (can be replaced with real endpoints)

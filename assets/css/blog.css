@@ -538,6 +538,12 @@
     overflow-y: auto;
     z-index: 90;
     box-shadow: 2px 0 5px var(--shadow-color);
+
+     width: 96px;
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    padding: 20px 0;
+    transition: width 0.3s ease;
 }
 
 .nav-container {
@@ -545,7 +551,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: var(--spacing-md) 0;
+    /* padding: var(--spacing-md) 0; */
 }
 
 .nav-list {
@@ -555,7 +561,7 @@
 }
 .nav-item:not(:first-child) {
   /* Áp dụng cho 3 phần tử cuối */
-  margin-top: 20px;
+  margin-top: 12px;
 }
 
 
@@ -568,6 +574,18 @@
     color: var(--text-color);
     border-left: 3px solid transparent;
     transition: all var(--transition-fast);
+
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    color: var(--light-text);
+    transition: all 0.2s ease;
+
+    font-size: 0.75rem;
+
    
 }
 
@@ -584,6 +602,7 @@
 .nav-item i {
     width: 20px;
     text-align: center;
+    font-size: 1.2rem;
 }
 
 .main-content {
