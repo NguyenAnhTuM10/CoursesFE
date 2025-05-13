@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML CSS từ Zero đến Hero - F8</title>
+    <style>
+      :root {
+        --primary-color: #f05123;
+        --text-color: #292929;
+        --background-light: #f5f5f5;
+        --border-color: #e8e8e8;
+        --sidebar-width: 320px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+      }
+
+      body {
+        background-color: white;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .header {
+        height: 50px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #29303b;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        z-index: 100;
+        color: white;
+      }
+
+      .back-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        margin-right: 12px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: bold;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-right: 16px;
+      }
+
+      .course-title {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .header-stats {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .header-stats span {
+        margin-right: 12px;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+      }
+
+      .header-button {
+        background: none;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .header-button i {
+        margin-right: 6px;
+      }
+
+      .main-content {
+        margin-top: 50px;
+        display: flex;
+        height: calc(100vh - 50px);
+      }
+
+      .video-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        background-color: #000;
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* 16:9 aspect ratio */
+        background-color: #000;
+      }
+
+      .video-placeholder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .video-controls {
+        display: flex;
+        background-color: #000;
+        padding: 8px 16px;
+        align-items: center;
+        color: white;
+      }
+
+      .play-button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        margin-right: 12px;
+      }
+
+      .volume-button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        margin-right: 12px;
+      }
+
+      .video-timeline {
+        flex: 1;
+        height: 4px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+        position: relative;
+        margin: 0 12px;
+      }
+
+      .timeline-progress {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 5%;
+        background-color: var(--primary-color);
+        border-radius: 2px;
+      }
+
+      .timeline-handle {
+        position: absolute;
+        top: 50%;
+        left: 5%;
+        width: 12px;
+        height: 12px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+      }
+
+      .video-time {
+        font-size: 12px;
+        margin-left: 12px;
+      }
+
+      .video-settings {
+        display: flex;
+        align-items: center;
+      }
+
+      .settings-button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 16px;
+        margin-left: 12px;
+        cursor: pointer;
+      }
+
+      .lesson-content {
+        background-color: white;
+        padding: 24px;
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      .lesson-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 24px;
+      }
+
+      .lesson-text {
+        font-size: 16px;
+        line-height: 1.8;
+        max-width: 800px;
+      }
+
+      .navigation-buttons {
+        display: flex;
+        margin-top: 32px;
+        justify-content: space-between;
+        max-width: 800px;
+      }
+
+      .nav-button {
+        padding: 8px 16px;
+        background-color: white;
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-button.primary {
+        background-color: #4080ff;
+        color: white;
+        border-color: #4080ff;
+      }
+
+      .course-sidebar {
+        width: var(--sidebar-width);
+        background-color: white;
+        border-left: 1px solid var(--border-color);
+        overflow-y: auto;
+      }
+
+      .sidebar-header {
+        padding: 16px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .sidebar-title {
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      .section-item {
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .section-header {
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .section-header.active {
+        font-weight: 600;
+      }
+
+      .section-title {
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+      }
+
+      .section-title .arrow {
+        margin-right: 8px;
+      }
+
+      .section-info {
+        font-size: 12px;
+        color: #666;
+      }
+
+      .lesson-list {
+        list-style: none;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .lesson-item {
+        padding: 12px 16px 12px 36px;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        position: relative;
+        transition: background-color 0.2s;
+      }
+
+      .lesson-item:hover {
+        background-color: #f5f7fa;
+      }
+
+      .lesson-item.active {
+        background-color: #feebeb;
+        color: var(--primary-color);
+      }
+
+      .lesson-item .time {
+        color: #666;
+        font-size: 12px;
+        margin-left: auto;
+      }
+
+      .lesson-item .lock {
+        margin-left: auto;
+        color: #666;
+      }
+
+      .comment-section {
+        padding: 16px;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .comment-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .comment-icon {
+        color: var(--primary-color);
+        font-size: 18px;
+        margin-right: 8px;
+      }
+
+      .comment-title {
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .comment-form input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <button class="back-button">&#8592;</button>
+      <div class="logo">F8</div>
+      <div class="course-title">HTML CSS từ Zero đến Hero</div>
+      <div class="header-stats">
+        <span>0% | 0/172 bài học</span>
+      </div>
+      <div class="header-actions">
+        <button class="header-button"><i>📝</i> Ghi chú</button>
+        <button class="header-button"><i>❓</i> Hướng dẫn</button>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <div class="video-section">
+        <div class="video-container">
+          <img
+            class="video-placeholder"
+            src="/api/placeholder/1280/720"
+            alt="Video course" />
+        </div>
+        <div class="video-controls">
+          <button class="play-button">▶</button>
+          <button class="volume-button">🔊</button>
+          <div class="video-timeline">
+            <div class="timeline-progress"></div>
+            <div class="timeline-handle"></div>
+          </div>
+          <div class="video-time">0:14 / 3:15</div>
+          <div class="video-settings">
+            <button class="settings-button">⚙️</button>
+            <button class="settings-button">⏏️</button>
+          </div>
+        </div>
+        <div class="lesson-content">
+          <h1 class="lesson-title">Bạn sẽ làm được gì sau khóa học?</h1>
+          <div class="lesson-text">
+            <p>
+              Trong khóa học HTML CSS từ Zero đến Hero, bạn sẽ được học những kỹ
+              năng cần thiết để có thể xây dựng giao diện website chuyên nghiệp.
+              Nội dung khóa học bao gồm:
+            </p>
+            <br />
+            <ol>
+              <li>Xây dựng được giao diện website</li>
+              <li>Phân tích giao diện website</li>
+              <li>Đặt tên class theo chuẩn BEM</li>
+              <li>Xây dựng layout với Flexbox</li>
+              <li>Làm hiệu ứng với animation</li>
+              <li>Xây dựng giao diện responsive</li>
+              <li>Rất nhiều các kỹ thuật nâng cao khác</li>
+            </ol>
+          </div>
+          <div class="navigation-buttons">
+            <button class="nav-button">← BÀI TRƯỚC</button>
+            <button class="nav-button primary">BÀI TIẾP THEO →</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="course-sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-title">Nội dung khóa học</div>
+        </div>
+
+        <div class="section-item">
+          <div class="section-header active">
+            <div class="section-title">
+              <span class="arrow">▼</span>
+              1. Bắt đầu
+            </div>
+            <div class="section-info">0/8 | 21:39</div>
+          </div>
+
+          <ul class="lesson-list">
+            <li class="lesson-item active">
+              1. Bạn sẽ làm được gì sau khóa học?
+              <span class="time">03:15</span>
+            </li>
+            <li class="lesson-item">
+              2. Tìm hiểu về HTML, CSS
+              <span class="lock">🔒</span>
+            </li>
+            <li class="lesson-item">
+              3. Làm quen với Dev tools
+              <span class="lock">🔒</span>
+            </li>
+            <li class="lesson-item">
+              4. Cài đặt VS Code, Page Ruler extension
+              <span class="lock">🔒</span>
+            </li>
+            <li class="lesson-item">
+              5. Khắc phục lỗi cài đặt Page Ruler Redux
+              <span class="lock">🔒</span>
+            </li>
+            <li class="lesson-item">
+              6. Lưu ý khi học lập trình tại F8
+              <span class="lock">🔒</span>
+            </li>
+            <li class="lesson-item">
+              7. Mua áo F8 | Đăng ký học Offline
+              <span class="lock">🔒</span>
+            </li>
+            <li class="lesson-item">
+              8. Tham gia cộng đồng F8 trên Discord
+              <span class="lock">🔒</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="arrow">▶</span>
+              2. Làm quen với HTML
+            </div>
+            <div class="section-info">0/13 | 55:49</div>
+          </div>
+        </div>
+
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="arrow">▶</span>
+              3. Làm quen với CSS
+            </div>
+            <div class="section-info">0/17 | 1:27:35</div>
+          </div>
+        </div>
+
+        <div class="comment-section">
+          <div class="comment-header">
+            <div class="comment-icon">💬</div>
+            <div class="comment-title">Hỏi đáp</div>
+          </div>
+          <div class="comment-form">
+            <input type="text" placeholder="Thêm ghi chú tại 00:14" />
+          </div>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>

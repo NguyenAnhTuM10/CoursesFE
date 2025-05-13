@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fullstack.edu.vn Clone</title>
+    <link rel="stylesheet" href="./assets/css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container header-container">
+        <div class="logo">
+          <a href="#">
+            <img
+              src="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
+              alt="Logo" />
+            <span>Học Lập Trình Để Đi Làm</span>
+          </a>
+        </div>
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            placeholder="Tìm kiếm khóa học, bài viết, video, ..." />
+        </div>
+        <div class="actions">
+          <a href="#" class="btn-action login-btn">Đăng nhập</a>
+          <a href="#" class="btn-action register-btn">Đăng ký</a>
+        </div>
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-content-wrapper">
+      <!-- Left Vertical Navigation -->
+      <nav class="main-nav">
+        <div class="nav-container">
+          <ul class="nav-list">
+            <li class="nav-item active">
+              <a href="#"><i class="fas fa-home"></i> Trang chủ</a>
+            </li>
+            <li class="nav-item">
+              <a href="#"><i class="fas fa-road"></i> Lộ trình</a>
+            </li>
+            <li class="nav-item">
+              <a href="#"><i class="fas fa-book"></i> Học</a>
+            </li>
+            <li class="nav-item">
+              <a href="#"><i class="fas fa-newspaper"></i> Blog</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+          <div class="container hero-container">
+            <div class="hero-content">
+              <h1>Học Lập Trình Để Đi Làm</h1>
+              <p>
+                Khóa học thực chiến giúp bạn trở thành lập trình viên chuyên
+                nghiệp.
+              </p>
+              <div class="hero-buttons">
+                <a href="#" class="btn-primary">Học miễn phí ngay</a>
+              </div>
+            </div>
+            <div class="hero-image">
+              <img
+                src="https://fullstack.edu.vn/static/media/fb-group-cards.4bd525b1b8baf7b1e5a2.png"
+                alt="Hero Image" />
+            </div>
+          </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+          <div class="container">
+            <h2 class="section-title">Tại sao nên học tại Fullstack?</h2>
+            <div class="features-grid">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Học thực tế</h3>
+                <p>Học trực tiếp với các dự án thực tế, học đi đôi với hành.</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3>Hướng dẫn tận tâm</h3>
+                <p>
+                  Giảng viên là những người đang làm việc tại các công ty lớn.
+                </p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-comments"></i>
+                </div>
+                <h3>Cộng đồng hỗ trợ</h3>
+                <p>Hàng nghìn học viên cùng nhau học tập, giúp đỡ lẫn nhau.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Popular Courses Section -->
+        <section class="courses">
+          <div class="container">
+            <div class="section-header">
+              <h2 class="section-title">Khóa học phổ biến</h2>
+              <a href="#" class="view-all"
+                >Xem tất cả <i class="fas fa-arrow-right"></i
+              ></a>
+            </div>
+            <div class="courses-grid" id="popularCourses">
+              <!-- Courses will be dynamically inserted by JavaScript -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Roadmaps Section -->
+        <section class="roadmaps">
+          <div class="container">
+            <div class="section-header">
+              <h2 class="section-title">Lộ trình học</h2>
+              <a href="#" class="view-all"
+                >Xem tất cả <i class="fas fa-arrow-right"></i
+              ></a>
+            </div>
+            <div class="roadmaps-grid" id="roadmaps">
+              <!-- Roadmaps will be dynamically inserted by JavaScript -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Recent Blog Posts -->
+        <section class="blog-posts">
+          <div class="container">
+            <div class="section-header">
+              <h2 class="section-title">Bài viết nổi bật</h2>
+              <a href="#" class="view-all"
+                >Xem tất cả <i class="fas fa-arrow-right"></i
+              ></a>
+            </div>
+            <div class="blog-posts-grid" id="blogPosts">
+              <!-- Blog posts will be dynamically inserted by JavaScript -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="container footer-container">
+            <div class="footer-column">
+              <div class="footer-logo">
+                <img
+                  src="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
+                  alt="Logo" />
+                <span>Học Lập Trình Để Đi Làm</span>
+              </div>
+              <p>Nền tảng học lập trình hàng đầu Việt Nam</p>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+            <div class="footer-column">
+              <h3>Về Fullstack</h3>
+              <ul>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Liên hệ</a></li>
+                <li><a href="#">Điều khoản</a></li>
+                <li><a href="#">Bảo mật</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h3>Sản phẩm</h3>
+              <ul>
+                <li><a href="#">Khóa học</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Lộ trình</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h3>Công ty cổ phần</h3>
+              <p>Mã số thuế: 0123456789</p>
+              <p>Ngày thành lập: 01/01/2020</p>
+              <p>Địa chỉ: Hà Nội, Việt Nam</p>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div class="container">
+              <p>
+                © 2023 Học Lập Trình Để Đi Làm. Nền tảng học lập trình hàng đầu
+                Việt Nam
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="./js/index.js"></script>
+    <script>
+      // Simple mobile menu toggle
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.querySelector(".main-nav").classList.toggle("active");
+        });
+    </script>
+  </body>
+</html>

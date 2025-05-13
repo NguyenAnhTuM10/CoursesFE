@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fullstack Blog Clone</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+      }
+
+      :root {
+        --primary-color: #f05123;
+        --secondary-color: #292929;
+        --text-color: #292929;
+        --gray-color: #666;
+        --light-gray: #f5f5f5;
+        --border-color: #e8e8e8;
+      }
+
+      body {
+        background-color: #fff;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* Header styles */
+      header {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 66px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 38px;
+      }
+
+      .logo-divider {
+        width: 1px;
+        height: 28px;
+        background-color: var(--border-color);
+        margin: 0 16px;
+      }
+
+      .logo-text {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-color);
+      }
+
+      .search-bar {
+        flex: 1;
+        max-width: 420px;
+        margin: 0 16px;
+      }
+
+      .search-box {
+        position: relative;
+        width: 100%;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 10px 40px 10px 16px;
+        border: 2px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .search-input:focus {
+        border-color: var(--primary-color);
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray-color);
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-menu a {
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+        border-radius: 20px;
+        padding: 8px 20px;
+        font-weight: 600;
+        transition: opacity 0.2s;
+      }
+
+      .btn-primary:hover {
+        opacity: 0.9;
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-left: 16px;
+      }
+
+      /* Main content area */
+      main {
+        margin-top: 86px;
+        padding: 20px 0;
+      }
+
+      .blog-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .blog-header h1 {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+
+      .blog-header p {
+        color: var(--gray-color);
+        font-size: 16px;
+      }
+
+      /* Filter section */
+      .filter-section {
+        margin-bottom: 32px;
+      }
+
+      .filter-container {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 12px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .filter-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .filter-item {
+        padding: 8px 16px;
+        background-color: var(--light-gray);
+        border-radius: 16px;
+        margin-right: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .filter-item.active {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .filter-item:hover:not(.active) {
+        background-color: #e0e0e0;
+      }
+
+      /* Blog posts grid */
+      .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .post-card {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s;
+      }
+
+      .post-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .post-thumbnail {
+        position: relative;
+        padding-top: 56.25%; /* 16:9 aspect ratio */
+        overflow: hidden;
+      }
+
+      .post-thumbnail img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .post-content {
+        padding: 16px;
+      }
+
+      .post-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .post-meta {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .author-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      .author-name {
+        font-size: 14px;
+        font-weight: 500;
+        margin-right: 16px;
+      }
+
+      .post-date {
+        color: var(--gray-color);
+        font-size: 14px;
+      }
+
+      .post-excerpt {
+        color: var(--gray-color);
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .post-stats {
+        display: flex;
+        align-items: center;
+        color: var(--gray-color);
+        font-size: 14px;
+      }
+
+      .stat-item {
+        display: flex;
+        align-items: center;
+        margin-right: 16px;
+      }
+
+      .stat-item i {
+        margin-right: 4px;
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      .page-item {
+        margin: 0 4px;
+      }
+
+      .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--border-color);
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+
+      .page-link:hover,
+      .page-link.active {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+
+      /* Footer */
+      footer {
+        background-color: #181821;
+        color: #a9b3bb;
+        padding: 64px 0 32px;
+        margin-top: 64px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        color: white;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .footer-column p,
+      .footer-column a {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 14px;
+        color: #a9b3bb;
+        transition: color 0.2s;
+      }
+
+      .footer-column a:hover {
+        color: white;
+      }
+
+      .social-links {
+        display: flex;
+        margin-top: 20px;
+      }
+
+      .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background-color: #32323e;
+        border-radius: 8px;
+        margin-right: 12px;
+        transition: background-color 0.2s;
+      }
+
+      .social-link:hover {
+        background-color: var(--primary-color);
+      }
+
+      .footer-logo img {
+        height: 38px;
+        margin-bottom: 16px;
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 32px;
+        border-top: 1px solid #32323e;
+        font-size: 14px;
+      }
+
+      /* Responsive styles */
+      @media (max-width: 992px) {
+        .posts-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header-inner {
+          flex-wrap: wrap;
+          height: auto;
+          padding: 12px 0;
+        }
+
+        .search-bar {
+          order: 3;
+          max-width: 100%;
+          margin: 12px 0;
+        }
+
+        .posts-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-menu {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="header-inner">
+          <div class="logo">
+            <a href="#">
+              <img src="/api/placeholder/120/40" alt="Fullstack Logo" />
+            </a>
+            <div class="logo-divider"></div>
+            <div class="logo-text">Blog</div>
+          </div>
+
+          <div class="search-bar">
+            <div class="search-box">
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Tìm kiếm bài viết..." />
+              <div class="search-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path
+                    d="M21 21L16.65 16.65"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-menu">
+            <a href="#">Đăng nhập</a>
+            <a href="#" class="btn-primary">Đăng ký</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      <div class="container">
+        <!-- Blog header -->
+        <div class="blog-header">
+          <h1>Blog Học Lập Trình</h1>
+          <p>Kiến thức miễn phí cho cộng đồng công nghệ Việt Nam</p>
+        </div>
+
+        <!-- Filter section -->
+        <div class="filter-section">
+          <div class="filter-container">
+            <div class="filter-item active">Tất cả bài viết</div>
+            <div class="filter-item">Front-end</div>
+            <div class="filter-item">Back-end</div>
+            <div class="filter-item">UI/UX</div>
+            <div class="filter-item">DevOps</div>
+            <div class="filter-item">React</div>
+            <div class="filter-item">JavaScript</div>
+            <div class="filter-item">NodeJS</div>
+            <div class="filter-item">PHP</div>
+          </div>
+        </div>
+
+        <!-- Blog posts grid -->
+        <div class="posts-grid">
+          <!-- Post 1 -->
+          <div class="post-card">
+            <div class="post-thumbnail">
+              <img src="/api/placeholder/400/225" alt="Post thumbnail" />
+            </div>
+            <div class="post-content">
+              <h3 class="post-title">Học Flexbox CSS qua ví dụ thực tế</h3>
+              <div class="post-meta">
+                <img
+                  src="/api/placeholder/24/24"
+                  alt="Author avatar"
+                  class="author-avatar" />
+                <span class="author-name">Sơn Đặng</span>
+                <span class="post-date">5 ngày trước</span>
+              </div>
+              <p class="post-excerpt">
+                Flexbox là một module của CSS giúp bạn thiết kế layout linh hoạt
+                mà không cần phải sử dụng float hay position. Trong bài viết
+                này, chúng ta sẽ tìm hiểu về cách sử dụng Flexbox thông qua các
+                ví dụ thực tế.
+              </p>
+              <div class="post-stats">
+                <div class="stat-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="3"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>1.5k</span>
+                </div>
+                <div class="stat-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>24</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 2 -->
+          <div class="post-card">
+            <div class="post-thumbnail">
+              <img src="/api/placeholder/400/225" alt="Post thumbnail" />
+            </div>
+            <div class="post-content">
+              <h3 class="post-title">
+                Cách tạo REST API với Express và MongoDB
+              </h3>
+              <div class="post-meta">
+                <img
+                  src="/api/placeholder/24/24"
+                  alt="Author avatar"
+                  class="author-avatar" />
+                <span class="author-name">Minh Thảo</span>
+                <span class="post-date">1 tuần trước</span>
+              </div>
+              <p class="post-excerpt">
+                REST API là một phần không thể thiếu trong phát triển web hiện
+                đại. Trong bài viết này, bạn sẽ học cách tạo một REST API đơn
+                giản sử dụng Express.js và MongoDB.
+              </p>
+              <div class="post-stats">
+                <div class="stat-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="3"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>982</span>
+                </div>
+                <div class="stat-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>18</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 3 -->
+          <div class="post-card">
+            <div class="post-thumbnail">
+              <img src="/api/placeholder/400/225" alt="Post thumbnail" />
+            </div>
+            <div class="post-content">
+              <h3 class="post-title">
+                10 thủ thuật JavaScript giúp code ngắn gọn hơn
+              </h3>
+              <div class="post-meta">
+                <img
+                  src="/api/placeholder/24/24"
+                  alt="Author avatar"
+                  class="author-avatar" />
+                <span class="author-name">Hà Anh</span>
+                <span class="post-date">2 tuần trước</span>
+              </div>
+              <p class="post-excerpt">
+                JavaScript là ngôn ngữ phổ biến nhất hiện nay và có rất nhiều
+                cách để làm cho code của bạn ngắn gọn, dễ đọc hơn. Trong bài
+                viết này, chúng ta sẽ khám phá 10 thủ thuật giúp code JavaScript
+                của bạn trở nên tối ưu hơn.
+              </p>
+              <div class="post-stats">
+                <div class="stat-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="3"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>2.1k</span>
+                </div>
+                <div class="stat-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>36</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 4 -->
+          <div class="post-card">
+            <div class="post-thumbnail">
+              <img src="/api/placeholder/400/225" alt="Post thumbnail" />
+            </div>
+            <div class="post-content">
+              <h3 class="post-title">Hiểu về React Hooks một cách đơn giản</h3>
+              <div class="post-meta">
+                <img
+                  src="/api/placeholder/24/24"
+                  alt="Author avatar"
+                  class="author-avatar" />
+                <span class="author-name">Sơn Đặng</span>
+                <span class="post-date">3 tuần trước</span>
+              </div>
+              <p class="post-excerpt">
+                React Hooks được giới thiệu từ phiên bản 16.8.0 và đã thay đổi
+                cách chúng ta viết components trong React. Bài viết này sẽ giúp
+                bạn hiểu một cách đơn giản về React Hooks và cách áp dụng chúng
+                vào dự án của mình.
+              </p>
+              <div class="post-stats">
+                <div class="stat-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="3"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>1.8k</span>
+                </div>
+                <div class="stat-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>29</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 5 -->
+          <div class="post-card">
+            <div class="post-thumbnail">
+              <img src="/api/placeholder/400/225" alt="Post thumbnail" />
+            </div>
+            <div class="post-content">
+              <h3 class="post-title">
+                Xây dựng ứng dụng Todo List với React và Redux
+              </h3>
+              <div class="post-meta">
+                <img
+                  src="/api/placeholder/24/24"
+                  alt="Author avatar"
+                  class="author-avatar" />
+                <span class="author-name">Trung Quân</span>
+                <span class="post-date">1 tháng trước</span>
+              </div>
+              <p class="post-excerpt">
+                Redux là một thư viện quản lý trạng thái phổ biến trong ứng dụng
+                React. Trong bài viết này, chúng ta sẽ xây dựng một ứng dụng
+                Todo List đơn giản sử dụng React và Redux từ đầu đến cuối.
+              </p>
+              <div class="post-stats">
+                <div class="stat-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="3"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>1.2k</span>
+                </div>
+                <div class="stat-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>22</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 6 -->
+          <div class="post-card">
+            <div class="post-thumbnail">
+              <img src="/api/placeholder/400/225" alt="Post thumbnail" />
+            </div>
+            <div class="post-content">
+              <h3 class="post-title">
+                Thiết kế UI/UX hiệu quả cho ứng dụng mobile
+              </h3>
+              <div class="post-meta">
+                <img
+                  src="/api/placeholder/24/24"
+                  alt="Author avatar"
+                  class="author-avatar" />
+                <span class="author-name">Hồng Anh</span>
+                <span class="post-date">1 tháng trước</span>
+              </div>
+              <p class="post-excerpt">
+                UI/UX đóng vai trò quan trọng trong việc tạo ra trải nghiệm
+                người dùng tốt trên ứng dụng mobile. Trong bài vi
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
